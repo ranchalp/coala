@@ -179,6 +179,10 @@ def load_configuration(arg_list, log_printer, arg_parser=None):
 
         sections = merge_section_dicts(sections, cli_sections)
 
+    if "EDITOR" in os.environ and "editor" not in sections["default"]:
+        sections["default"].add_or_create_setting(
+            Setting("editor", os.environ["EDITOR"]))
+
     for section in sections:
         if section != "default":
             sections[section].defaults = sections["default"]
