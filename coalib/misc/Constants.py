@@ -142,7 +142,7 @@ def configure_logging():
             'colored': {
                 'class': 'logging.StreamHandler',
                 'formatter': 'colored',
-                'stream': sys.stderr
+                'stream': sys.stdout
             }
         },
         'root': {

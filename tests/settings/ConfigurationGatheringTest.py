@@ -27,8 +27,9 @@ class ConfigurationGatheringTest(unittest.TestCase):
     def test_gather_configuration(self):
         args = (lambda *args: True, self.log_printer)
 
-        # Passing the default coafile name only triggers a warning.
-        gather_configuration(*args, arg_list=["-c abcdefghi/invalid/.coafile"])
+        # Using incomplete settings (e.g. an invalid coafile) will error
+        with self.assertRaises(SystemExit):
+            gather_configuration(*args, arg_list=["-c abcdefghi/invalid/.coafile"])
 
         # Using a bad filename explicitly exits coala.
         with self.assertRaises(SystemExit):
